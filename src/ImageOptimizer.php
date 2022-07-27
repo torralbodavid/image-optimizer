@@ -8,6 +8,6 @@ class ImageOptimizer
 {
     public function image(string $image): Compress
     {
-        return (new Compress($image));
+        return new Compress($image);
     }
 }
