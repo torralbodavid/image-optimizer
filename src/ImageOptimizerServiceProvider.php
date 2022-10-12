@@ -10,8 +10,8 @@ class ImageOptimizerServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('identity-card-checker')
-            ->hasConfigFile()
+            ->name('image-optimizer')
+            ->hasConfigFile('image-optimizer')
             ->hasViews();
     }
 }
