@@ -3,7 +3,6 @@
 namespace Torralbodavid\ImageOptimizer\Services\Squoosh\Compressor;
 
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 
 class Compress
 {
@@ -32,7 +31,7 @@ class Compress
 
     public function toWebp()
     {
-        if(! $this->imageExists('webp')) {
+        if (! $this->imageExists('webp')) {
             $this->compress(
                 '--webp',
                 '{quality: 100, lossless: 1}'
