@@ -2,6 +2,8 @@
 
 namespace Torralbodavid\ImageOptimizer\Services\Squoosh\Compressor;
 
+use Illuminate\Support\Facades\File;
+
 class Compress
 {
     public function __construct(protected string $image)
@@ -29,10 +31,12 @@ class Compress
 
     public function toWebp()
     {
-        $this->compress(
-            '--webp',
-            '{quality: 100, lossless: 1}'
-        );
+        if (! $this->imageExists('webp')) {
+            $this->compress(
+                '--webp',
+                '{quality: 100, lossless: 1}'
+            );
+        }
 
         return asset(pathinfo($this->image, PATHINFO_FILENAME).'.webp');
     }
@@ -52,5 +56,12 @@ class Compress
         exec("export PATH=\$PATH:~/bin; npx @squoosh/cli $command '$configuration' $this->image", $output, $code);
 
         return $code;
+    }
+
+    private function imageExists(string $format)
+    {
+        $path = substr($this->image, 0, strrpos($this->image, ".")).".$format";
+
+        return File::exists($path);
     }
 }
