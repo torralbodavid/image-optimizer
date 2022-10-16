@@ -83,6 +83,6 @@ class Compress
 
     private function convertedImage(): string
     {
-        return asset(pathinfo($this->image, PATHINFO_FILENAME).".$this->format");
+        return pathinfo($this->image, PATHINFO_FILENAME).".$this->format";
     }
 }
