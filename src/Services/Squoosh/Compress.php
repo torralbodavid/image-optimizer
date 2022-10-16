@@ -12,25 +12,31 @@ class Compress
     {
     }
 
-    public function toJpeg()
+    public function toJpeg(): string
     {
         $this->format = 'jpeg';
 
-        return $this->compress('--mozjpeg');
+        $this->compress('--mozjpeg');
+
+        return $this->convertedImage();
     }
 
-    public function toJpegXl()
+    public function toJpegXl(): string
     {
         $this->format = 'jxl';
 
-        return $this->compress('--jxl');
+        $this->compress('--jxl');
+
+        return $this->convertedImage();
     }
 
-    public function toPng()
+    public function toPng(): string
     {
         $this->format = 'png';
 
-        return $this->compress('--oxipng');
+        $this->compress('--oxipng');
+
+        return $this->convertedImage();
     }
 
     public function toWebp(): string
@@ -42,7 +48,7 @@ class Compress
             '{"quality":60,"target_size":0,"target_PSNR":0,"method":4,"sns_strength":50,"filter_strength":60,"filter_sharpness":0,"filter_type":1,"partitions":0,"segments":4,"pass":1,"show_compressed":0,"preprocessing":0,"autofilter":0,"partition_limit":0,"alpha_compression":1,"alpha_filtering":1,"alpha_quality":100,"lossless":0,"exact":0,"image_hint":0,"emulate_jpeg_size":0,"thread_level":0,"low_memory":0,"near_lossless":100,"use_delta_palette":0,"use_sharp_yuv":0}'
         );
 
-        return asset(pathinfo($this->image, PATHINFO_FILENAME).'.webp');
+        return $this->convertedImage();
     }
 
     public function toAvif(): string
@@ -54,7 +60,7 @@ class Compress
             '{"cqLevel":33,"cqAlphaLevel":-1,"denoiseLevel":0,"tileColsLog2":0,"tileRowsLog2":0,"speed":10,"subsample":1,"chromaDeltaQ":false,"sharpness":0,"tune":0}'
         );
 
-        return asset(pathinfo($this->image, PATHINFO_FILENAME).'.avif');
+        return $this->convertedImage();
     }
 
     private function compress(string $command, string $configuration = 'auto'): ?int
@@ -73,5 +79,10 @@ class Compress
         $path = substr($this->image, 0, strrpos($this->image, ".")).".$format";
 
         return File::exists($path);
+    }
+
+    private function convertedImage(): string
+    {
+        return asset(pathinfo($this->image, PATHINFO_FILENAME).".$this->format");
     }
 }
