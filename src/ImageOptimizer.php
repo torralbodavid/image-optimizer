@@ -2,7 +2,7 @@
 
 namespace Torralbodavid\ImageOptimizer;
 
-use Torralbodavid\ImageOptimizer\Services\Squoosh\Compressor\Compress;
+use Torralbodavid\ImageOptimizer\Services\Squoosh\Compress;
 
 class ImageOptimizer
 {
