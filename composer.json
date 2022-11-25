@@ -52,6 +52,16 @@
             "phpstan/extension-installer": true
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Torralbodavid\\ImageOptimizer\\ImageOptimizerServiceProvider"
+            ],
+            "aliases": {
+                "ImageOptimizer": "Torralbodavid\\ImageOptimizer\\ImageOptimizer"
+            }
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
