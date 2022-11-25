@@ -11,7 +11,7 @@ class ImageOptimizerServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('image-optimizer')
-            ->hasConfigFile('image-optimizer')
+            ->hasConfigFile()
             ->hasViews();
     }
 }
